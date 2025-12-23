@@ -87,9 +87,8 @@ export default function TenantAvailabilityReportPage() {
 
   const { properties, isLoading: isLoadingProperties } = useTenantProperties();
 
-  const { rooms, isLoading: isLoadingRooms } = useTenantRooms(
-    selectedPropertyId ?? ""
-  );
+  const { rooms, isLoading: isLoadingRooms } =
+    useTenantRooms(selectedPropertyId);
 
   const handlePropertyChange = (propertyId: string) => {
     setSelectedPropertyId(propertyId);
@@ -111,6 +110,7 @@ export default function TenantAvailabilityReportPage() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* --- Pilihan Properti --- */}
             <div className="space-y-2">
               <label className="text-sm font-medium">Properti</label>
               <Select
@@ -168,6 +168,7 @@ export default function TenantAvailabilityReportPage() {
             </div>
           </div>
 
+          {/* --- Tampilan Kalender (muncul setelah memilih kamar) --- */}
           {selectedPropertyId && selectedRoomId ? (
             <AvailabilityView
               propertyId={selectedPropertyId}

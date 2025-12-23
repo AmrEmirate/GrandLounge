@@ -6,6 +6,12 @@ import api from "@/lib/api";
 import { DateRange } from "react-day-picker";
 import { PeakSeasonPayload } from "@/components/tenant/PeakSeasonDialog";
 
+export interface Availability {
+  date: string;
+  status: "AVAILABLE" | "BOOKED" | "PENDING" | "UNAVAILABLE";
+  price?: number;
+}
+
 const availabilityService = {
   saveAvailability: (
     propertyId: string,
