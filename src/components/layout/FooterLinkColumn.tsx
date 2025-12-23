@@ -1,4 +1,3 @@
-// src/components/layout/FooterLinkColumn.tsx
 import Link from "next/link";
 
 interface LinkItem {
@@ -17,7 +16,10 @@ export const FooterLinkColumn = ({ title, links }: FooterLinkColumnProps) => (
     <ul className="space-y-3">
       {links.map((link) => (
         <li key={link.href}>
-          <Link href={link.href} className="text-gray-400 hover:text-white transition-colors text-sm">
+          <Link
+            href={link.href}
+            className="text-gray-400 hover:text-white transition-colors text-sm"
+          >
             {link.text}
           </Link>
         </li>

@@ -1,31 +1,38 @@
-"use client"
+"use client";
 
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-// Tipe data untuk kategori (dari API)
 interface Category {
   id: string;
   name: string;
 }
 
-// Tipe data untuk bagian form ini
 interface BasicInfoData {
   name: string;
   categoryId: string;
   description: string;
 }
 
-// Definisikan props yang diterima komponen
 interface PropertyBasicInfoProps {
   formData: BasicInfoData;
   updateFormData: (updates: Partial<BasicInfoData>) => void;
   categories: Category[];
 }
 
-export function PropertyBasicInfo({ formData, updateFormData, categories }: PropertyBasicInfoProps) {
+export function PropertyBasicInfo({
+  formData,
+  updateFormData,
+  categories,
+}: PropertyBasicInfoProps) {
   return (
     <div className="space-y-6">
       <div>
@@ -70,5 +77,5 @@ export function PropertyBasicInfo({ formData, updateFormData, categories }: Prop
         />
       </div>
     </div>
-  )
+  );
 }

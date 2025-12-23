@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Building2 } from "lucide-react";
 import { RegisterForm } from "@/components/auth/register-form";
 import { SocialLogin } from "@/components/auth/social-login";
-import { useRegistration } from "@/hooks/use-registration";
+import { useRegistration } from "@/hooks/auth/use-registration";
 
 function RegisterContent() {
     const searchParams = useSearchParams();

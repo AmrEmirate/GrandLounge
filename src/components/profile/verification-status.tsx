@@ -1,21 +1,25 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/ui/use-toast";
 import apiHelper from "@/lib/apiHelper";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 
-// Komponen untuk menampilkan status verifikasi dan tombol aksi
 export function VerificationStatus() {
   const { user } = useAuth();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
-  // Fungsi untuk menangani pengiriman ulang email verifikasi
   const handleResendVerification = async () => {
     if (!user?.email) {
       toast({
@@ -28,20 +32,18 @@ export function VerificationStatus() {
 
     setIsLoading(true);
     try {
-      // --- PERBAIKAN ---
-      // Kirim email pengguna di dalam body permintaan POST
-      await apiHelper.post('/auth/resend-verification', { email: user.email });
-      // -----------------
-      
+      await apiHelper.post("/auth/resend-verification", { email: user.email });
+
       toast({
-        title: 'Email Terkirim',
-        description: 'Email verifikasi telah dikirim ke alamat email Anda.',
+        title: "Email Terkirim",
+        description: "Email verifikasi telah dikirim ke alamat email Anda.",
       });
     } catch (error: any) {
-      const errorMessage = error.response?.data?.message || 'Gagal mengirim email verifikasi.';
+      const errorMessage =
+        error.response?.data?.message || "Gagal mengirim email verifikasi.";
       toast({
-        variant: 'destructive',
-        title: 'Gagal',
+        variant: "destructive",
+        title: "Gagal",
         description: errorMessage,
       });
     } finally {
@@ -49,7 +51,6 @@ export function VerificationStatus() {
     }
   };
 
-  // Jika data user belum ada, jangan render apa-apa
   if (!user) {
     return null;
   }
@@ -71,11 +72,12 @@ export function VerificationStatus() {
             <Badge variant="destructive">Belum Terverifikasi</Badge>
           )}
         </div>
-        
+
         {!user.verified && (
           <div className="p-4 border rounded-lg bg-yellow-50 border-yellow-200">
             <p className="text-sm text-yellow-800">
-              Akun Anda belum terverifikasi. Silakan verifikasi email Anda untuk mendapatkan akses penuh ke semua fitur.
+              Akun Anda belum terverifikasi. Silakan verifikasi email Anda untuk
+              mendapatkan akses penuh ke semua fitur.
             </p>
             <Button
               className="mt-3"

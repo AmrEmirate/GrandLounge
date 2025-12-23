@@ -1,9 +1,15 @@
-"use client"
+"use client";
 
-import { useTenantCategories } from "@/hooks/use-tenant-categories"
-import { CategoriesTable } from "@/components/tenant/categories-table"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CategoriesPageHeader } from "@/components/tenant/categories-page-header" // Import komponen baru
+import { useTenantCategories } from "@/hooks/tenant/use-tenant-categories";
+import { CategoriesTable } from "@/components/tenant/categories-table";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { CategoriesPageHeader } from "@/components/tenant/categories-page-header"; // Import komponen baru
 
 export default function TenantCategoriesPage() {
   const {
@@ -14,7 +20,7 @@ export default function TenantCategoriesPage() {
     handleCreate,
     handleUpdate,
     handleDelete,
-  } = useTenantCategories()
+  } = useTenantCategories();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -24,7 +30,9 @@ export default function TenantCategoriesPage() {
         <Card>
           <CardHeader>
             <CardTitle>Category List</CardTitle>
-            <CardDescription>A list of all your property categories.</CardDescription>
+            <CardDescription>
+              A list of all your property categories.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <CategoriesTable
@@ -40,5 +48,5 @@ export default function TenantCategoriesPage() {
         </Card>
       </div>
     </div>
-  )
+  );
 }

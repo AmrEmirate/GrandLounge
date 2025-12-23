@@ -1,32 +1,36 @@
-"use client"
+"use client";
 
-import { useFormContext } from "react-hook-form"
+import { useFormContext } from "react-hook-form";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { Category, City } from "@/hooks/use-edit-property"
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Category, City } from "@/hooks/properties/use-edit-property";
 
 interface PropertyFormBasicProps {
-  categories: Category[]
-  cities: City[]
-  onCityChange: (cityId: string) => void
+  categories: Category[];
+  cities: City[];
+  onCityChange: (cityId: string) => void;
 }
 
-export function PropertyFormBasic({ categories, cities, onCityChange }: PropertyFormBasicProps) {
-  const form = useFormContext()
+export function PropertyFormBasic({
+  categories,
+  cities,
+  onCityChange,
+}: PropertyFormBasicProps) {
+  const form = useFormContext();
 
   return (
     <div className="space-y-4">
@@ -57,7 +61,7 @@ export function PropertyFormBasic({ categories, cities, onCityChange }: Property
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {categories.map(category => (
+                {categories.map((category) => (
                   <SelectItem key={category.id} value={category.id}>
                     {category.name}
                   </SelectItem>
@@ -87,7 +91,6 @@ export function PropertyFormBasic({ categories, cities, onCityChange }: Property
         )}
       />
 
-      {/* Ini adalah field Alamat Lengkap yang ditambahkan */}
       <FormField
         control={form.control}
         name="address"
@@ -113,17 +116,20 @@ export function PropertyFormBasic({ categories, cities, onCityChange }: Property
           render={({ field }) => (
             <FormItem>
               <FormLabel>City</FormLabel>
-              <Select onValueChange={(value) => {
-                field.onChange(value)
-                onCityChange(value)
-              }} value={field.value}>
+              <Select
+                onValueChange={(value) => {
+                  field.onChange(value);
+                  onCityChange(value);
+                }}
+                value={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a city" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {cities.map(city => (
+                  {cities.map((city) => (
                     <SelectItem key={city.id} value={city.id}>
                       {city.name}
                     </SelectItem>
@@ -149,5 +155,5 @@ export function PropertyFormBasic({ categories, cities, onCityChange }: Property
         />
       </div>
     </div>
-  )
+  );
 }

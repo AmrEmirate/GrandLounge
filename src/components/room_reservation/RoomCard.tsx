@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import api from "@/utils/api";
+import api from "@/lib/api";
 
 interface Props {
   room: any;
@@ -19,7 +19,6 @@ export default function RoomCard({ room }: Props) {
         guestCount: room.guestCount,
       });
 
-      // Redirect ke detail booking
       router.push(`/room_reservation/${res.data.id}`);
     } catch (err) {
       console.error("Booking error:", err);

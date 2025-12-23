@@ -1,6 +1,13 @@
-// src/data/tenant-help-data.ts
-
-import { BookOpen, MessageCircle, Phone, Mail, Video, FileText, Users, TrendingUp } from "lucide-react";
+import {
+  BookOpen,
+  MessageCircle,
+  Phone,
+  Mail,
+  Video,
+  FileText,
+  Users,
+  TrendingUp,
+} from "lucide-react";
 
 export const quickActions = [
   {
@@ -71,7 +78,7 @@ export const faqs = [
   },
   {
     question: "What commission does Grand Lodge charge?",
-    answer: "Grand Lodge charges a competitive commission of 15% on each successful booking...",
+    answer:
+      "Grand Lodge charges a competitive commission of 15% on each successful booking...",
   },
-  // ... (pertanyaan dan jawaban lainnya) ...
 ];

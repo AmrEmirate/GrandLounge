@@ -1,20 +1,28 @@
-// src/components/layout/mobile-menu.tsx
-
 "use client";
 
 import { usePathname } from "next/navigation";
-import { mainNavItems, getUserNavItems, guestNavItems } from "@/lib/constants/navigation-data";
-import { MobileMenuItem } from "./MobileMenuItem"; // Import komponen baru
+import {
+  mainNavItems,
+  getUserNavItems,
+  guestNavItems,
+} from "@/lib/constants/navigation-data";
+import { MobileMenuItem } from "./MobileMenuItem";
 
 interface MobileMenuProps {
   isOpen: boolean;
   isLoggedIn: boolean;
   userType: "user" | "tenant";
   onClose: () => void;
-  onLogout: () => void; // Tambahkan prop untuk logout
+  onLogout: () => void;
 }
 
-export function MobileMenu({ isOpen, isLoggedIn, userType, onClose, onLogout }: MobileMenuProps) {
+export function MobileMenu({
+  isOpen,
+  isLoggedIn,
+  userType,
+  onClose,
+  onLogout,
+}: MobileMenuProps) {
   if (!isOpen) return null;
 
   const handleLogout = () => {
@@ -25,7 +33,6 @@ export function MobileMenu({ isOpen, isLoggedIn, userType, onClose, onLogout }: 
   return (
     <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t z-50 md:hidden">
       <nav className="px-4 py-2 space-y-1">
-        {/* Render menu utama */}
         {mainNavItems.map((item) => (
           <MobileMenuItem key={item.name} href={item.href} onClick={onClose}>
             {item.name}
@@ -35,10 +42,13 @@ export function MobileMenu({ isOpen, isLoggedIn, userType, onClose, onLogout }: 
         <div className="border-t pt-2 mt-2">
           {isLoggedIn ? (
             <>
-              {/* Render menu untuk user yang login */}
-              {getUserNavItems(userType).map(item => (
-                <MobileMenuItem key={item.name} href={item.href} onClick={onClose}>
-                    {item.name}
+              {getUserNavItems(userType).map((item) => (
+                <MobileMenuItem
+                  key={item.name}
+                  href={item.href}
+                  onClick={onClose}
+                >
+                  {item.name}
                 </MobileMenuItem>
               ))}
               <button
@@ -50,9 +60,13 @@ export function MobileMenu({ isOpen, isLoggedIn, userType, onClose, onLogout }: 
             </>
           ) : (
             <>
-              {/* Render menu untuk tamu */}
               {guestNavItems.map((item) => (
-                <MobileMenuItem key={item.name} href={item.href} onClick={onClose} isPrimary={item.isPrimary}>
+                <MobileMenuItem
+                  key={item.name}
+                  href={item.href}
+                  onClick={onClose}
+                  isPrimary={item.isPrimary}
+                >
                   {item.name}
                 </MobileMenuItem>
               ))}

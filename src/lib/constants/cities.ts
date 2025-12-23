@@ -11,5 +11,4 @@ export const cities = [
   "Bekasi",
   "Bali",
   "Yogyakarta",
-]
-//dummy
+];

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useTenantProperties } from "@/hooks/use-tenant-properties"
-import { PropertiesHeader } from "@/components/tenant/properties-header"
-import { PropertiesGrid } from "@/components/tenant/properties-grid"
-import { PaginationControls } from "@/components/tenant/pagination-controls"
-import { PropertiesGridSkeleton } from "@/components/tenant/properties-grid-skeleton" // 1. Impor komponen skeleton
+import { useTenantProperties } from "@/hooks/tenant/use-tenant-properties";
+import { PropertiesHeader } from "@/components/tenant/properties-header";
+import { PropertiesGrid } from "@/components/tenant/properties-grid";
+import { PaginationControls } from "@/components/tenant/pagination-controls";
+import { PropertiesGridSkeleton } from "@/components/tenant/properties-grid-skeleton"; // 1. Impor komponen skeleton
 
 export default function TenantPropertiesPage() {
   const {
@@ -20,7 +20,7 @@ export default function TenantPropertiesPage() {
     sortOrder,
     setSortOrder,
     handleDeleteProperty,
-  } = useTenantProperties()
+  } = useTenantProperties();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -34,7 +34,6 @@ export default function TenantPropertiesPage() {
           onSortOrderChange={setSortOrder}
         />
         <div className="mt-8">
-          {/* 2. Ganti logika loading */}
           {isLoading ? (
             <PropertiesGridSkeleton />
           ) : (
@@ -53,5 +52,5 @@ export default function TenantPropertiesPage() {
         />
       </div>
     </div>
-  )
+  );
 }

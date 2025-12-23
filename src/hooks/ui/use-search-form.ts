@@ -1,9 +1,6 @@
-// src/hooks/use-search-form.ts
-
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast"; // Gunakan toast
+import { useToast } from "@/hooks/ui/use-toast";
 
-// Definisikan tipe state untuk form
 export interface SearchFormState {
   destination: string;
   checkIn?: Date;
@@ -18,12 +15,17 @@ const initialState: SearchFormState = {
   guests: "1",
 };
 
-export function useSearchForm(onSearch: (query: SearchFormState | null) => void) {
+export function useSearchForm(
+  onSearch: (query: SearchFormState | null) => void
+) {
   const [formState, setFormState] = useState<SearchFormState>(initialState);
   const { toast } = useToast();
 
-  const setFieldValue = <K extends keyof SearchFormState>(field: K, value: SearchFormState[K]) => {
-    setFormState(prev => ({ ...prev, [field]: value }));
+  const setFieldValue = <K extends keyof SearchFormState>(
+    field: K,
+    value: SearchFormState[K]
+  ) => {
+    setFormState((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSearch = () => {
@@ -31,14 +33,15 @@ export function useSearchForm(onSearch: (query: SearchFormState | null) => void)
     if (!destination || !checkIn || !checkOut) {
       toast({
         title: "Incomplete Information",
-        description: "Please fill in destination, check-in, and check-out dates.",
+        description:
+          "Please fill in destination, check-in, and check-out dates.",
         variant: "destructive",
       });
       return;
     }
     onSearch(formState);
   };
-  
+
   const handleReset = () => {
     setFormState(initialState);
     onSearch(null);

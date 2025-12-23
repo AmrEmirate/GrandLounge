@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { DateRange, DayPicker } from "react-day-picker"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { DateRange, DayPicker } from "react-day-picker";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,17 +10,21 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 
 interface AvailabilityDialogProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (dateRange: DateRange, isAvailable: boolean) => void;
-  roomId: string; 
-  onSuccess: () => void; 
+  roomId: string;
+  onSuccess: () => void;
 }
 
-export function AvailabilityDialog({ isOpen, onClose, onSave }: AvailabilityDialogProps) {
+export function AvailabilityDialog({
+  isOpen,
+  onClose,
+  onSave,
+}: AvailabilityDialogProps) {
   const [selectedRange, setSelectedRange] = useState<DateRange | undefined>();
 
   const handleSave = (isAvailable: boolean) => {
@@ -28,7 +32,6 @@ export function AvailabilityDialog({ isOpen, onClose, onSave }: AvailabilityDial
       alert("Please select a date or date range.");
       return;
     }
-    // Jika hanya satu tanggal dipilih, buat rentangnya sama
     const range: DateRange = {
       from: selectedRange.from,
       to: selectedRange.to || selectedRange.from,
@@ -43,7 +46,8 @@ export function AvailabilityDialog({ isOpen, onClose, onSave }: AvailabilityDial
         <DialogHeader>
           <DialogTitle>Set Room Availability</DialogTitle>
           <DialogDescription>
-            Peringatan: Tanggal yang akan disimpan kurang 1 hari dari tanggal yang di tentukan karena masalah zona waktu.
+            Peringatan: Tanggal yang akan disimpan kurang 1 hari dari tanggal
+            yang di tentukan karena masalah zona waktu.
           </DialogDescription>
         </DialogHeader>
         <div className="flex justify-center py-4">

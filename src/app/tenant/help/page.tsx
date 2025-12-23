@@ -1,4 +1,3 @@
-// File asli Anda, sekarang sudah di-refactor
 "use client";
 
 import { HelpHeader } from "@/components/tenant/help/HelpHeader";

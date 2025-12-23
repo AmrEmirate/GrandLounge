@@ -15,7 +15,7 @@ export interface PropertyData {
   id: string; 
   name: string; 
   description: string; 
-  address: string | null; // Penyesuaian Tipe
+  address: string | null; 
   categoryId: string; 
   cityId: string; 
   zipCode: string; 

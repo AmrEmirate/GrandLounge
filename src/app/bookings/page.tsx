@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar, MapPin, Users, Phone } from "lucide-react"
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Calendar, MapPin, Users, Phone } from "lucide-react";
 
 export default function BookingsPage() {
   const [bookings] = useState([
@@ -51,27 +51,27 @@ export default function BookingsPage() {
       contactPhone: "+62 22 123456",
       contactEmail: "info@mountainlodge.com",
     },
-  ])
+  ]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "confirmed":
-        return "bg-blue-100 text-blue-800"
+        return "bg-blue-100 text-blue-800";
       case "completed":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-green-800";
       case "upcoming":
-        return "bg-yellow-100 text-yellow-800"
+        return "bg-yellow-100 text-yellow-800";
       case "cancelled":
-        return "bg-red-100 text-red-800"
+        return "bg-red-100 text-red-800";
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-gray-100 text-gray-800";
     }
-  }
+  };
 
   const filterBookings = (status: string) => {
-    if (status === "all") return bookings
-    return bookings.filter((booking) => booking.status === status)
-  }
+    if (status === "all") return bookings;
+    return bookings.filter((booking) => booking.status === status);
+  };
 
   const BookingCard = ({ booking }: { booking: any }) => (
     <Card className="mb-4">
@@ -85,7 +85,9 @@ export default function BookingsPage() {
           <div className="flex-1">
             <div className="flex justify-between items-start mb-2">
               <h3 className="text-lg font-semibold">{booking.propertyName}</h3>
-              <Badge className={getStatusColor(booking.status)}>{booking.status}</Badge>
+              <Badge className={getStatusColor(booking.status)}>
+                {booking.status}
+              </Badge>
             </div>
 
             <div className="space-y-2 text-sm text-gray-600">
@@ -105,8 +107,12 @@ export default function BookingsPage() {
 
             <div className="mt-4 flex flex-col md:flex-row justify-between items-start md:items-center">
               <div>
-                <p className="text-lg font-bold text-blue-600">Rp {booking.totalPrice.toLocaleString("id-ID")}</p>
-                <p className="text-sm text-gray-500">Booked on {booking.bookingDate}</p>
+                <p className="text-lg font-bold text-blue-600">
+                  Rp {booking.totalPrice.toLocaleString("id-ID")}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Booked on {booking.bookingDate}
+                </p>
               </div>
 
               <div className="mt-2 md:mt-0 space-y-2 md:space-y-0 md:space-x-2 flex flex-col md:flex-row">
@@ -128,14 +134,16 @@ export default function BookingsPage() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">My Bookings</h1>
-          <p className="text-gray-600 mt-1">Manage your accommodation bookings</p>
+          <p className="text-gray-600 mt-1">
+            Manage your accommodation bookings
+          </p>
         </div>
 
         <Tabs defaultValue="all" className="space-y-6">
@@ -187,6 +195,5 @@ export default function BookingsPage() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }
-//dummy

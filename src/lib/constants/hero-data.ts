@@ -17,5 +17,4 @@ export const heroSlides = [
     cta: "Explore Properties",
     image: "/luxury-downtown-hotel.png",
   },
-]
-//dummy
+];

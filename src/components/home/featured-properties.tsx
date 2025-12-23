@@ -1,19 +1,15 @@
-// src/components/home/featured-properties.tsx
-
 "use client";
 
 import { PropertyCard } from "@/components/properties/property-card";
 import Link from "next/link";
-import { SearchQuery } from './search-form';
-// 1. Import hook yang baru dibuat
-import { useFeaturedProperties } from '@/hooks/use-featured-properties';
+import { SearchQuery } from "./search-form";
+import { useFeaturedProperties } from "@/hooks/properties/use-featured-properties";
 
 interface FeaturedPropertiesProps {
   filter: SearchQuery | null;
   categoryFilter: string;
 }
 
-// Komponen Pembantu untuk UI
 const LoadingState = () => <p className="text-center">Memuat properti...</p>;
 
 const EmptyState = () => (
@@ -28,10 +24,14 @@ const ErrorState = ({ message }: { message: string }) => (
   </div>
 );
 
-
-export function FeaturedProperties({ filter, categoryFilter }: FeaturedPropertiesProps) {
-  // 2. Gunakan custom hook untuk mendapatkan data dan state
-  const { properties, isLoading, error } = useFeaturedProperties(filter, categoryFilter);
+export function FeaturedProperties({
+  filter,
+  categoryFilter,
+}: FeaturedPropertiesProps) {
+  const { properties, isLoading, error } = useFeaturedProperties(
+    filter,
+    categoryFilter
+  );
 
   const renderContent = () => {
     if (isLoading) return <LoadingState />;
@@ -58,8 +58,7 @@ export function FeaturedProperties({ filter, categoryFilter }: FeaturedPropertie
             Temukan pilihan akomodasi premium dari kami
           </p>
         </div>
-        
-        {/* 3. Tampilan menjadi lebih bersih */}
+
         {renderContent()}
 
         <div className="text-center mt-12">

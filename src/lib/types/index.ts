@@ -53,7 +53,6 @@ export interface Room {
   capacity: number;
   basePrice: number;
   roomNumber?: string;
-  // Tambahkan properti baru dari backend
   totalPrice?: number;
   dailyPrices?: { date: string; price: number }[];
 }
@@ -83,7 +82,7 @@ export interface Property {
   tenantId: string;
   name: string;
   description: string;
-  address: string | null; 
+  address: string | null;
   mainImage?: string;
   latitude?: number;
   longitude?: number;
@@ -132,7 +131,12 @@ export interface UserOrder {
   checkIn: string;
   checkOut: string;
   totalPrice: number;
-  status: 'MENUNGGU_PEMBAYARAN' | 'MENUNGGU_KONFIRMASI' | 'DIPROSES' | 'DIBATALKAN' | 'SELESAI';
+  status:
+    | "MENUNGGU_PEMBAYARAN"
+    | "MENUNGGU_KONFIRMASI"
+    | "DIPROSES"
+    | "DIBATALKAN"
+    | "SELESAI";
   paymentDeadline: string;
   paymentProof?: string | null;
   user: {
@@ -161,6 +165,11 @@ export interface TenantTransaction {
   property: {
     name: string;
   };
-  status: 'MENUNGGU_PEMBAYARAN' | 'MENUNGGU_KONFIRMASI' | 'DIPROSES' | 'DIBATALKAN' | 'SELESAI';
+  status:
+    | "MENUNGGU_PEMBAYARAN"
+    | "MENUNGGU_KONFIRMASI"
+    | "DIPROSES"
+    | "DIBATALKAN"
+    | "SELESAI";
   paymentProof?: string;
 }

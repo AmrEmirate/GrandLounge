@@ -1,6 +1,3 @@
-// src/components/properties/property-card-skeleton.tsx
-
-// TAMBAHKAN "export default" di sini
 export default function PropertyCardSkeleton() {
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden">

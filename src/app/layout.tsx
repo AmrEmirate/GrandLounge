@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
 import { Roboto } from "next/font/google";
-import './globals.css'
-import { Toaster } from '@/components/ui/sonner'
-import Navbar from '@/components/Navbar'
-import { AuthProvider } from '@/context/AuthContext'
-import { usePathname } from 'next/navigation'
+import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import Navbar from "@/components/Navbar";
+import { AuthProvider } from "@/context/AuthContext";
+import { usePathname } from "next/navigation";
 import Template from "./template";
 import Script from "next/script";
-import Providers from '@/components/providers';
+import Providers from "@/components/providers";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -16,31 +16,31 @@ const roboto = Roboto({
   variable: "--font-roboto",
 });
 
-
 function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isHome = pathname === '/';
+  const isHome = pathname === "/";
 
   return (
     <>
       <Navbar />
-      <main className={!isHome ? 'pt-20' : ''}>{children}</main>
+      <main className={!isHome ? "pt-20" : ""}>{children}</main>
     </>
-  )
+  );
 }
-
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <head>
-        {/* Anda bisa menambahkan <title> dan <meta> di sini secara manual jika perlu */}
         <title>Grand Lodge - Premium Property Rentals</title>
-        <meta name="description" content="Find and book premium accommodations for your perfect stay" />
+        <meta
+          name="description"
+          content="Find and book premium accommodations for your perfect stay"
+        />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <Script
@@ -59,5 +59,5 @@ export default function RootLayout({
         </AuthProvider>
       </body>
     </html>
-  )
+  );
 }

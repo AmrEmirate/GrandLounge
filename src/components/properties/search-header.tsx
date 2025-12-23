@@ -1,35 +1,39 @@
-"use client"
+"use client";
 
-import { useSearchParams, useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { PropertySort } from "./property-sort"
-import { PropertyFilters } from "./property-filters"
-import { Search, Filter } from "lucide-react"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { useEffect, useState } from "react"
+import { useSearchParams, useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { PropertySort } from "./property-sort";
+import { PropertyFilters } from "./property-filters";
+import { Search, Filter } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { useEffect, useState } from "react";
 
 interface SearchHeaderProps {
-  propertiesCount: number
+  propertiesCount: number;
 }
 
 export function SearchHeader({ propertiesCount }: SearchHeaderProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
-  
-  // Fungsi untuk update URL dengan parameter baru
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("q") || "");
+
   const updateQueryParams = (key: string, value: string) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
-    
+
     if (!value) {
       current.delete(key);
     } else {
       current.set(key, value);
     }
 
-    // Reset halaman ke 1 setiap kali ada filter baru
-    current.set('page', '1');
+    current.set("page", "1");
 
     const search = current.toString();
     const query = search ? `?${search}` : "";
@@ -37,9 +41,9 @@ export function SearchHeader({ propertiesCount }: SearchHeaderProps) {
   };
 
   const handleSearch = (e: React.FormEvent) => {
-      e.preventDefault();
-      updateQueryParams('q', searchTerm);
-  }
+    e.preventDefault();
+    updateQueryParams("q", searchTerm);
+  };
 
   return (
     <div className="bg-white shadow-sm border-b">
@@ -47,9 +51,13 @@ export function SearchHeader({ propertiesCount }: SearchHeaderProps) {
         <div className="flex flex-col space-y-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">
-              {searchParams.get("destination") ? `Properties in ${searchParams.get("destination")}` : "All Properties"}
+              {searchParams.get("destination")
+                ? `Properties in ${searchParams.get("destination")}`
+                : "All Properties"}
             </h1>
-            <p className="mt-2 text-sm text-gray-600">{propertiesCount} properties found</p>
+            <p className="mt-2 text-sm text-gray-600">
+              {propertiesCount} properties found
+            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -66,7 +74,10 @@ export function SearchHeader({ propertiesCount }: SearchHeaderProps) {
             <div className="flex gap-2">
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline" className="md:hidden bg-transparent">
+                  <Button
+                    variant="outline"
+                    className="md:hidden bg-transparent"
+                  >
                     <Filter className="h-4 w-4 mr-2" />
                     Filters
                   </Button>
@@ -87,6 +98,5 @@ export function SearchHeader({ propertiesCount }: SearchHeaderProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

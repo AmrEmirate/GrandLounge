@@ -1,5 +1,3 @@
-// src/app/tenant/profile/page.tsx
-
 "use client";
 
 import { ProfileTabs } from "@/components/profile/profile-tabs";

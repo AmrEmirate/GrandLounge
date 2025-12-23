@@ -1,5 +1,11 @@
-// src/lib/constants/footer-data.ts
-import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Instagram,
+  Twitter,
+} from "lucide-react";
 
 export const contactInfo = [
   { icon: Phone, text: "+62 21 1234 5678" },
@@ -11,9 +17,18 @@ export const popularDestinations = {
   title: "Popular Destinations",
   links: [
     { href: "/properties?category=Vila&location=Bali", text: "Vila in Bali" },
-    { href: "/properties?category=Hotel&location=Jakarta", text: "Hotel in Jakarta" },
-    { href: "/properties?category=Apartemen&location=Bandung", text: "Apartment in Bandung" },
-    { href: "/properties?category=Vila&location=Yogyakarta", text: "Vila in Yogyakarta" },
+    {
+      href: "/properties?category=Hotel&location=Jakarta",
+      text: "Hotel in Jakarta",
+    },
+    {
+      href: "/properties?category=Apartemen&location=Bandung",
+      text: "Apartment in Bandung",
+    },
+    {
+      href: "/properties?category=Vila&location=Yogyakarta",
+      text: "Vila in Yogyakarta",
+    },
   ],
 };
 
@@ -34,7 +49,7 @@ export const socialLinks = [
 ];
 
 export const legalLinks = [
-    { href: "/privacy", text: "Privacy Policy" },
-    { href: "/terms", text: "Terms of Service" },
-    { href: "/cookies", text: "Cookie Policy" },
+  { href: "/privacy", text: "Privacy Policy" },
+  { href: "/terms", text: "Terms of Service" },
+  { href: "/cookies", text: "Cookie Policy" },
 ];

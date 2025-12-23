@@ -8,17 +8,20 @@ import { getPropertyById } from "@/services/propertyService";
 import { PropertyClientComponent } from "@/components/property/PropertyClientComponent";
 import { notFound } from "next/navigation";
 
-
-export default async function PropertyDetailPage({ params }: { params: { id: string } }) {
+export default async function PropertyDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const property = await getPropertyById(params.id);
 
-   if (!property) {
-    notFound(); 
+  if (!property) {
+    notFound();
   }
 
   const galleryImages = [
     property.mainImage,
-    ...(property.images?.map((img: { imageUrl: any; }) => img.imageUrl) || [])
+    ...(property.images?.map((img: { imageUrl: any }) => img.imageUrl) || []),
   ].filter(Boolean) as string[];
 
   return (
@@ -32,14 +35,15 @@ export default async function PropertyDetailPage({ params }: { params: { id: str
         </Link>
 
         <div className="space-y-8">
-          <PropertyImageGallery images={galleryImages} propertyName={property.name} />
+          <PropertyImageGallery
+            images={galleryImages}
+            propertyName={property.name}
+          />
           <PropertyInfo property={property} />
         </div>
 
-        {/* 3. Render komponen interaktif, berikan data awal sebagai props */}
         <PropertyClientComponent property={property} />
 
-        {/* Render review juga di server */}
         {property.reviews && property.reviews.length > 0 && (
           <div className="mt-8">
             <PropertyReviews reviews={property.reviews} />
@@ -47,5 +51,5 @@ export default async function PropertyDetailPage({ params }: { params: { id: str
         )}
       </div>
     </div>
-  )
+  );
 }

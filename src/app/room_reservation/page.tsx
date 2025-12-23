@@ -1,60 +1,75 @@
-'use client';
+"use client";
 
-import { Suspense, useState, useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { format } from 'date-fns';
-import { id } from 'date-fns/locale';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { useToast } from '@/components/ui/use-toast';
-import { useAuth } from '@/context/AuthContext';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
-import { Loader2 } from 'lucide-react';
-import api from '@/utils/api'; 
+import { Suspense, useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { format } from "date-fns";
+import { id } from "date-fns/locale";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
+import { useAuth } from "@/context/AuthContext";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Loader2 } from "lucide-react";
+import api from "@/lib/api";
 
 function ReservationContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { toast } = useToast();
   const { user, loading } = useAuth();
-  const [paymentMethod, setPaymentMethod] = useState('manual');
+  const [paymentMethod, setPaymentMethod] = useState("manual");
   const [isProcessing, setIsProcessing] = useState(false);
-  const propertyId = searchParams.get('propertyId');
-  const roomId = searchParams.get('roomId');
-  const roomName = searchParams.get('roomName');
-  const checkIn = searchParams.get('checkIn');
-  const checkOut = searchParams.get('checkOut');
-  const nights = searchParams.get('nights');
-  const totalPrice = searchParams.get('totalPrice');
+  const propertyId = searchParams.get("propertyId");
+  const roomId = searchParams.get("roomId");
+  const roomName = searchParams.get("roomName");
+  const checkIn = searchParams.get("checkIn");
+  const checkOut = searchParams.get("checkOut");
+  const nights = searchParams.get("nights");
+  const totalPrice = searchParams.get("totalPrice");
 
   useEffect(() => {
     if (!loading && !user) {
       toast({
-        title: 'Sesi Tidak Ditemukan',
-        description: 'Anda harus login untuk melanjutkan reservasi.',
-        variant: 'destructive',
+        title: "Sesi Tidak Ditemukan",
+        description: "Anda harus login untuk melanjutkan reservasi.",
+        variant: "destructive",
       });
-      router.push('/auth/login');
+      router.push("/auth/login");
     }
   }, [user, loading, router, toast]);
 
   const handleCreateReservation = async () => {
     if (loading || !user) {
       toast({
-        title: 'Harap Tunggu',
-        description: 'Sesi Anda sedang dimuat. Silakan coba lagi.',
+        title: "Harap Tunggu",
+        description: "Sesi Anda sedang dimuat. Silakan coba lagi.",
       });
       return;
     }
 
-    if (!propertyId || !roomId || !roomName || !checkIn || !checkOut || !totalPrice) {
+    if (
+      !propertyId ||
+      !roomId ||
+      !roomName ||
+      !checkIn ||
+      !checkOut ||
+      !totalPrice
+    ) {
       toast({
-        title: 'Error',
-        description: 'Data reservasi tidak lengkap. Coba ulangi dari halaman properti.',
-        variant: 'destructive',
+        title: "Error",
+        description:
+          "Data reservasi tidak lengkap. Coba ulangi dari halaman properti.",
+        variant: "destructive",
       });
-      router.push('/properties');
+      router.push("/properties");
       return;
     }
 
@@ -75,25 +90,30 @@ function ReservationContent() {
       };
 
       const response = await api.post("/reservations/by-room-name", payload);
-        toast({
-          title: 'Reservasi Berhasil Dibuat',
-          description: 'Silakan unggah bukti pembayaran Anda di halaman pesanan.',
-        });
-        router.push('/dashboard/akun_user/orders');
-      
+      toast({
+        title: "Reservasi Berhasil Dibuat",
+        description: "Silakan unggah bukti pembayaran Anda di halaman pesanan.",
+      });
+      router.push("/dashboard/akun_user/orders");
     } catch (error: any) {
       toast({
-        title: 'Gagal Membuat Reservasi',
-        description: error.response?.data?.message || 'Terjadi kesalahan.',
-        variant: 'destructive',
+        title: "Gagal Membuat Reservasi",
+        description: error.response?.data?.message || "Terjadi kesalahan.",
+        variant: "destructive",
       });
     } finally {
       setIsProcessing(false);
     }
   };
 
-  // Tampilkan loading jika data user belum siap atau parameter URL tidak ada
-  if (loading || !propertyId || !checkIn || !checkOut || !nights || !totalPrice) {
+  if (
+    loading ||
+    !propertyId ||
+    !checkIn ||
+    !checkOut ||
+    !nights ||
+    !totalPrice
+  ) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="h-12 w-12 animate-spin text-blue-600" />
@@ -116,9 +136,17 @@ function ReservationContent() {
             <div>
               <h3 className="font-semibold">Detail Tanggal Menginap</h3>
               <div className="p-4 border rounded-md mt-2 space-y-1">
-                <p><strong>Check-in:</strong> {format(new Date(checkIn), 'dd MMMM yyyy', { locale: id })}</p>
-                <p><strong>Check-out:</strong> {format(new Date(checkOut), 'dd MMMM yyyy', { locale: id })}</p>
-                <p><strong>Durasi:</strong> {nights} malam</p>
+                <p>
+                  <strong>Check-in:</strong>{" "}
+                  {format(new Date(checkIn), "dd MMMM yyyy", { locale: id })}
+                </p>
+                <p>
+                  <strong>Check-out:</strong>{" "}
+                  {format(new Date(checkOut), "dd MMMM yyyy", { locale: id })}
+                </p>
+                <p>
+                  <strong>Durasi:</strong> {nights} malam
+                </p>
               </div>
             </div>
             <div>
@@ -127,7 +155,7 @@ function ReservationContent() {
                 <div className="flex justify-between">
                   <span>Total Biaya</span>
                   <span className="font-bold">
-                    Rp {parseInt(totalPrice).toLocaleString('id-ID')}
+                    Rp {parseInt(totalPrice).toLocaleString("id-ID")}
                   </span>
                 </div>
               </div>
@@ -135,8 +163,16 @@ function ReservationContent() {
           </div>
           <div>
             <h3 className="font-semibold mb-2">Metode Pembayaran</h3>
-            <RadioGroup defaultValue="manual" className="space-y-2" onValueChange={setPaymentMethod} value={paymentMethod}>
-              <Label htmlFor="manual" className="flex items-center space-x-3 border p-4 rounded-md cursor-pointer hover:bg-gray-50 has-[:checked]:border-blue-600">
+            <RadioGroup
+              defaultValue="manual"
+              className="space-y-2"
+              onValueChange={setPaymentMethod}
+              value={paymentMethod}
+            >
+              <Label
+                htmlFor="manual"
+                className="flex items-center space-x-3 border p-4 rounded-md cursor-pointer hover:bg-gray-50 has-[:checked]:border-blue-600"
+              >
                 <RadioGroupItem value="manual" id="manual" />
                 <span>Transfer Bank Manual (Upload Bukti)</span>
               </Label>
@@ -144,9 +180,14 @@ function ReservationContent() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full" size="lg" onClick={handleCreateReservation} disabled={isProcessing || loading || !user}>
+          <Button
+            className="w-full"
+            size="lg"
+            onClick={handleCreateReservation}
+            disabled={isProcessing || loading || !user}
+          >
             {isProcessing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isProcessing ? 'Memproses...' : 'Lanjutkan ke Pembayaran'}
+            {isProcessing ? "Memproses..." : "Lanjutkan ke Pembayaran"}
           </Button>
         </CardFooter>
       </Card>
@@ -156,7 +197,13 @@ function ReservationContent() {
 
 export default function RoomReservationPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="h-12 w-12 animate-spin text-blue-600" /></div>}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <Loader2 className="h-12 w-12 animate-spin text-blue-600" />
+        </div>
+      }
+    >
       <ReservationContent />
     </Suspense>
   );

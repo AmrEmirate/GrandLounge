@@ -1,29 +1,36 @@
-"use client"
+"use client";
 
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-// Tipe data untuk kota (dari API)
 interface City {
   id: string;
   name: string;
 }
 
-// Tipe data untuk bagian form ini
 interface LocationData {
   cityId: string;
   zipCode: string;
 }
 
-// Definisikan props yang diterima komponen
 interface PropertyLocationInfoProps {
   formData: LocationData;
   updateFormData: (updates: Partial<LocationData>) => void;
   cities: City[];
 }
 
-export function PropertyLocationInfo({ formData, updateFormData, cities }: PropertyLocationInfoProps) {
+export function PropertyLocationInfo({
+  formData,
+  updateFormData,
+  cities,
+}: PropertyLocationInfoProps) {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -57,5 +64,5 @@ export function PropertyLocationInfo({ formData, updateFormData, cities }: Prope
         </div>
       </div>
     </div>
-  )
+  );
 }

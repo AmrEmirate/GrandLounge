@@ -1,45 +1,49 @@
-'use client'
+"use client";
 
-import { useState, useCallback } from 'react'
-import Image from 'next/image'
-import { UploadCloud, X } from 'lucide-react'
-import { useDropzone } from 'react-dropzone'
-import { cn } from '@/lib/utils'
+import { useState, useCallback } from "react";
+import Image from "next/image";
+import { UploadCloud, X } from "lucide-react";
+import { useDropzone } from "react-dropzone";
+import { cn } from "@/lib/utils";
 
 interface ImageUploadProps {
-  files: File[]
-  onFilesChange: (files: File[]) => void
-  maxFiles?: number
+  files: File[];
+  onFilesChange: (files: File[]) => void;
+  maxFiles?: number;
 }
 
-export function ImageUpload({ files, onFilesChange, maxFiles = 1 }: ImageUploadProps) {
+export function ImageUpload({
+  files,
+  onFilesChange,
+  maxFiles = 1,
+}: ImageUploadProps) {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      const newFiles = [...files, ...acceptedFiles].slice(0, maxFiles)
-      onFilesChange(newFiles)
+      const newFiles = [...files, ...acceptedFiles].slice(0, maxFiles);
+      onFilesChange(newFiles);
     },
     [files, onFilesChange, maxFiles]
-  )
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: { 'image/*': ['.jpeg', '.jpg', '.png'] },
+    accept: { "image/*": [".jpeg", ".jpg", ".png"] },
     maxSize: 5 * 1024 * 1024, // 5MB
     multiple: maxFiles > 1,
-  })
+  });
 
   const removeFile = (index: number) => {
-    const newFiles = files.filter((_, i) => i !== index)
-    onFilesChange(newFiles)
-  }
+    const newFiles = files.filter((_, i) => i !== index);
+    onFilesChange(newFiles);
+  };
 
   return (
     <div>
       <div
         {...getRootProps()}
         className={cn(
-          'flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer',
-          isDragActive ? 'border-blue-600 bg-blue-50' : 'border-gray-300'
+          "flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-lg cursor-pointer",
+          isDragActive ? "border-blue-600 bg-blue-50" : "border-gray-300"
         )}
       >
         <input {...getInputProps()} />
@@ -61,7 +65,6 @@ export function ImageUpload({ files, onFilesChange, maxFiles = 1 }: ImageUploadP
                 className="object-cover rounded-md"
                 onLoad={(e) => URL.revokeObjectURL(e.currentTarget.src)}
               />
-              {/* --- PERBAIKAN DI SINI --- */}
               <button
                 type="button"
                 onClick={() => removeFile(index)}
@@ -75,5 +78,5 @@ export function ImageUpload({ files, onFilesChange, maxFiles = 1 }: ImageUploadP
         </div>
       )}
     </div>
-  )
+  );
 }

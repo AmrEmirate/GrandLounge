@@ -1,4 +1,3 @@
-// src/components/layout/FooterInfo.tsx
 import Link from "next/link";
 import { contactInfo } from "@/lib/constants/footer-data";
 
@@ -12,7 +11,10 @@ export const FooterInfo = () => (
     </p>
     <div className="space-y-3">
       {contactInfo.map(({ icon: Icon, text }) => (
-        <div key={text} className="flex items-center text-gray-400 hover:text-white transition-colors">
+        <div
+          key={text}
+          className="flex items-center text-gray-400 hover:text-white transition-colors"
+        >
           <Icon className="h-4 w-4 mr-3 flex-shrink-0" />
           <span className="text-sm">{text}</span>
         </div>

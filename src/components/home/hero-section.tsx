@@ -1,28 +1,30 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { heroSlides } from "@/lib/constants/hero-data"
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { heroSlides } from "@/lib/constants/hero-data";
 
 export function HeroSection() {
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
-    }, 5000)
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000);
 
-    return () => clearInterval(timer)
-  }, [])
+    return () => clearInterval(timer);
+  }, []);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % heroSlides.length)
-  }
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)
-  }
+    setCurrentSlide(
+      (prev) => (prev - 1 + heroSlides.length) % heroSlides.length
+    );
+  };
 
   return (
     <div className="relative h-[600px] overflow-hidden">
@@ -40,15 +42,18 @@ export function HeroSection() {
             <div className="absolute inset-0 bg-black bg-opacity-40" />
             <div className="relative z-10 flex items-center justify-center h-full">
               <div className="text-center text-white max-w-4xl mx-auto px-4">
-                <h1 className="text-4xl md:text-6xl font-bold mb-6">{slide.title}</h1>
-                <p className="text-xl md:text-2xl mb-8 opacity-90">{slide.subtitle}</p>
+                <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                  {slide.title}
+                </h1>
+                <p className="text-xl md:text-2xl mb-8 opacity-90">
+                  {slide.subtitle}
+                </p>
               </div>
             </div>
           </div>
         </div>
       ))}
 
-      {/* Navigation Arrows */}
       <Button
         variant="ghost"
         size="icon"
@@ -71,12 +76,14 @@ export function HeroSection() {
         {heroSlides.map((_, index) => (
           <button
             key={index}
-            className={`w-3 h-3 rounded-full transition-colors ${index === currentSlide ? "bg-white" : "bg-white/50"}`}
+            className={`w-3 h-3 rounded-full transition-colors ${
+              index === currentSlide ? "bg-white" : "bg-white/50"
+            }`}
             aria-label={`Go to slide ${index + 1}`}
             onClick={() => setCurrentSlide(index)}
           />
         ))}
       </div>
     </div>
-  )
+  );
 }

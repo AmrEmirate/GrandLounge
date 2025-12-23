@@ -1,18 +1,24 @@
-'use client';
+"use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import { jwtDecode } from 'jwt-decode';
-import api from '@/utils/api';
-import { toast } from 'sonner';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useCallback,
+} from "react";
+import { useRouter } from "next/navigation";
+import { jwtDecode } from "jwt-decode";
+import api from "@/lib/api";
+import { toast } from "sonner";
 
-// Tipe User tetap sama
 interface User {
   id: string;
   fullName: string;
   email: string;
   profilePicture?: string;
-  role: 'USER' | 'TENANT';
+  role: "USER" | "TENANT";
   verified: boolean;
   createdAt: string;
 }
@@ -64,44 +70,43 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(false);
   }, [processToken]);
 
-  const login = useCallback((token: string) => {
-    localStorage.setItem("authToken", token);
-    const loggedInUser = processToken(token);
+  const login = useCallback(
+    (token: string) => {
+      localStorage.setItem("authToken", token);
+      const loggedInUser = processToken(token);
 
-    if (loggedInUser) {
-      toast.success("Login Berhasil!", {
-        description: "Selamat datang kembali!",
-      });
+      if (loggedInUser) {
+        toast.success("Login Berhasil!", {
+          description: "Selamat datang kembali!",
+        });
 
-      setTimeout(() => {
-        if (loggedInUser.role === "TENANT") {
-          router.replace("/tenant/dashboard");
-        } else {
-          router.replace("/");
-        }
-      }, 500);
-    }
-  }, [processToken, router]);
+        setTimeout(() => {
+          if (loggedInUser.role === "TENANT") {
+            router.replace("/tenant/dashboard");
+          } else {
+            router.replace("/");
+          }
+        }, 500);
+      }
+    },
+    [processToken, router]
+  );
 
   const logout = () => {
-    localStorage.removeItem('authToken');
+    localStorage.removeItem("authToken");
     setUser(null);
-    delete api.defaults.headers.common['Authorization'];
-    router.push('/auth/login');
+    delete api.defaults.headers.common["Authorization"];
+    router.push("/auth/login");
   };
   const value = { user, loading, login, logout, setUser };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

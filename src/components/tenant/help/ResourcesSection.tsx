@@ -2,12 +2,14 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { resources } from "@/data/tenant-help-data";
+import { resources } from "@/lib/constants/tenant-help-data";
 
 export function ResourcesSection() {
   return (
     <div className="mb-16">
-      <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Learning Resources</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+        Learning Resources
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {resources.map((resource, index) => (
           <Card key={index} className="hover:shadow-lg transition-shadow">
