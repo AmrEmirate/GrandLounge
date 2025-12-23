@@ -49,7 +49,7 @@ export default function ReservationForm({
     setIsLoading(true);
 
     try {
-      await api.post("/room-reservation", {
+      await api.post("/reservations", {
         roomId,
         checkInDate: checkIn,
         checkOutDate: checkOut,

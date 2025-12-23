@@ -132,7 +132,7 @@ export function useNewPropertyForm() {
     setIsLoading(true);
     const formData = createPropertyFormData(values);
     try {
-      await apiHelper.post("/properties/my-properties", formData, {
+      await apiHelper.post("/properties", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast({

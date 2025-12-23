@@ -18,9 +18,12 @@ const fetchPropertyAvailability = async (
   const startDate = format(startOfMonth(month), "yyyy-MM-dd");
   const endDate = format(endOfMonth(month), "yyyy-MM-dd");
 
-  const { data } = await api.get(`/calendar-report/property/${propertyId}`, {
-    params: { startDate, endDate },
-  });
+  const { data } = await api.get(
+    `/reports/availability/property/${propertyId}`,
+    {
+      params: { startDate, endDate },
+    }
+  );
   return data.data || {};
 };
 
