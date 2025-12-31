@@ -22,7 +22,11 @@ interface DestinationSelectProps {
   className?: string;
 }
 
-export function DestinationSelect({ value, onChange }: DestinationSelectProps) {
+export function DestinationSelect({
+  value,
+  onChange,
+  className,
+}: DestinationSelectProps) {
   const [cities, setCities] = useState<City[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,7 +47,7 @@ export function DestinationSelect({ value, onChange }: DestinationSelectProps) {
 
   return (
     <Select value={value} onValueChange={onChange} disabled={isLoading}>
-      <SelectTrigger>
+      <SelectTrigger className={cn("w-full", className)}>
         <SelectValue
           placeholder={isLoading ? "Memuat kota..." : "Pilih kota destinasi"}
         />

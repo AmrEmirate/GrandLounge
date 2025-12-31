@@ -73,36 +73,40 @@ export default function SplitScreenMap() {
   const jakartaPosition: [number, number] = [-6.2088, 106.8456];
 
   return (
-    <section className="h-[70vh] w-full flex flex-col lg:flex-row border-t border-b">
-      <div className="w-full lg:w-2/3 h-full">
-        <MapContainer
-          center={jakartaPosition}
-          zoom={12}
-          style={{ height: "100%", width: "100%" }}
-          scrollWheelZoom={true}
-        >
-          <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          />
-          <MapView />
-        </MapContainer>
-      </div>
-      <div className="w-full lg:w-1/3 bg-gray-50 p-8 flex flex-col justify-center items-center text-center">
-        <div className="max-w-md">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">
-            Temukan Properti di Sekitar Anda
-          </h2>
-          <p className="text-muted-foreground mb-8">
-            Jelajahi peta untuk melihat properti yang tersedia di dekat lokasi
-            Anda secara instan.
-          </p>
-          <Button asChild size="lg" className="w-full group">
-            <Link href="/properties">
-              <Search className="mr-2 h-5 w-5" />
-              Mulai Cari Semua Properti
-            </Link>
-          </Button>
+    <section className="py-12 px-4 md:px-8 lg:px-16">
+      <div className="container mx-auto">
+        <div className="h-[50vh] w-full flex flex-col lg:flex-row rounded-xl overflow-hidden shadow-lg border">
+          <div className="w-full lg:w-2/3 h-full">
+            <MapContainer
+              center={jakartaPosition}
+              zoom={12}
+              style={{ height: "100%", width: "100%" }}
+              scrollWheelZoom={true}
+            >
+              <TileLayer
+                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+              />
+              <MapView />
+            </MapContainer>
+          </div>
+          <div className="w-full lg:w-1/3 bg-gray-50 p-8 flex flex-col justify-center items-center text-center">
+            <div className="max-w-md">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                Temukan Properti di Sekitar Anda
+              </h2>
+              <p className="text-muted-foreground mb-6 text-sm">
+                Jelajahi peta untuk melihat properti yang tersedia di dekat
+                lokasi Anda secara instan.
+              </p>
+              <Button asChild size="lg" className="w-full group">
+                <Link href="/properties">
+                  <Search className="mr-2 h-5 w-5" />
+                  Mulai Cari Semua Properti
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
