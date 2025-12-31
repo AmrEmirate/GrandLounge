@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -46,6 +47,39 @@ export default function Sidebar() {
       .join("")
       .toUpperCase();
   };
+
+  /* Hydration mismatch fix: Only render user data on client side */
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <div className="flex h-full max-h-screen flex-col gap-2 bg-gray-900 text-white">
+        <div className="flex-1 overflow-auto py-2">
+          <div className="flex flex-col items-center justify-center p-4 space-y-2">
+            <div className="h-20 w-20 rounded-full bg-gray-800 animate-pulse" />
+            <div className="h-4 w-24 bg-gray-800 rounded animate-pulse" />
+          </div>
+          <Separator className="my-2 bg-gray-800" />
+          {/* Navigation Links Skeleton or just render links (they are static mostly) */}
+          <nav className="grid items-start px-2 text-sm font-medium lg:px-4 gap-1">
+            {navItems.map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-300"
+              >
+                <item.icon className="h-4 w-4" />
+                {item.label}
+              </div>
+            ))}
+          </nav>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-full max-h-screen flex-col gap-2 bg-gray-900 text-white">

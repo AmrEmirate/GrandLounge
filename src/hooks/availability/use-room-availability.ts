@@ -51,7 +51,7 @@ const fetchRoomDetails = async (propertyId: string, roomId: string) => {
   ]);
   return {
     room: roomRes.data.data as Room,
-    peakSeasons: peakSeasonsRes.data as PeakSeason[],
+    peakSeasons: peakSeasonsRes.data.data as PeakSeason[],
   };
 };
 
